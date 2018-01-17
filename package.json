@@ -7,20 +7,31 @@
   "scripts": {
     "build": "tsc",
     "watch": "tsc -w",
-    "test": "jasmine-ts test/*.ts"
+    "test": "nyc jasmine-ts test/*.ts",
+    "coveralls": "cat ./coverage/lcov.info | coveralls"
   },
   "author": "",
   "license": "MIT",
   "devDependencies": {
+    "@types/axios-mock-adapter": "1.9.0",
     "@types/jasmine": "^2.8.4",
     "@types/redux-mock-store": "0.0.13",
     "axios-mock-adapter": "^1.10.0",
+    "coveralls": "^3.0.0",
+    "istanbul": "^0.4.5",
     "jasmine-ts": "^0.2.1",
+    "nyc": "^11.4.1",
     "redux-mock-store": "^1.4.0",
     "typescript": "^2.6.2"
   },
   "dependencies": {
     "axios": "^0.17.1",
     "redux": "^3.7.2"
+  },
+  "nyc": {
+    "all": true,
+    "extension": [
+      ".ts"
+    ]
   }
 }
