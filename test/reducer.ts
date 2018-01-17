@@ -67,6 +67,46 @@ describe('reducer creator', () => {
     });
   });
 
+  it('shouldn\'t touch existing entries in the state', () => {
+    const initialState = {
+      isFetching: false,
+      isUnableToFetch: false,
+      mapping: {
+        Test1: {
+          isFetching: false,
+          isUnableToFetch: false,
+          lastFetched: 1,
+          instance: {
+            id: 'Test1',
+            firstName: 'Test',
+            lastName: 'Test',
+          },
+        },
+      },
+    };
+
+    expect(reducer(
+      initialState,
+      {
+        type: PersonAction.REQUEST_SUCCESS,
+        id: 'Test2',
+        data: {
+          id: 'Test2',
+          firstName: 'Test',
+          lastName: 'Test',
+        },
+      },
+    ).mapping.Test1).toBeDefined();
+
+    expect(reducer(
+      initialState,
+      {
+        type: PersonAction.REQUEST_ERROR,
+        id: 'Test2',
+      },
+    ).mapping.Test1).toBeDefined();
+  });
+
   it('should respond to list retrieval request', () => {
     const state = reducer(undefined, { type: PersonAction.REQUEST_LIST });
 
