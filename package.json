@@ -35,6 +35,16 @@
     "all": true,
     "extension": [
       ".ts"
+    ],
+    "reporter": [
+      "lcov",
+      "text",
+      "text-summary"
+    ],
+    "exclude": [
+      "coverage/*",
+      "dist/*",
+      "test/*"
     ]
   }
 }
