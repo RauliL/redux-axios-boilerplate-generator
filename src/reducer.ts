@@ -1,6 +1,6 @@
-import { AnyAction } from 'redux';
+import { AnyAction } from "redux";
 
-import Model, { ModelConfig, ModelState, ModelStateInstanceMapping } from './model';
+import Model, { ModelConfig, ModelState, ModelStateInstanceMapping } from "./model";
 
 const createInitialState = <T extends Model>(): ModelState<T> => ({
   isFetching: false,
@@ -17,8 +17,8 @@ export default function createReducer<T extends Model>(config: ModelConfig<T>) {
       [action.id]: {
         isFetching: true,
         isUnableToFetch: false,
-      }
-    }
+      },
+    },
   });
 
   const onRequestError = (state: ModelState<T>, action: AnyAction): ModelState<T> => ({
@@ -29,8 +29,8 @@ export default function createReducer<T extends Model>(config: ModelConfig<T>) {
         isFetching: false,
         isUnableToFetch: true,
         lastFetched: Date.now(),
-      }
-    }
+      },
+    },
   });
 
   const onRequestSuccess = (state: ModelState<T>, action: AnyAction): ModelState<T> => {
@@ -42,12 +42,12 @@ export default function createReducer<T extends Model>(config: ModelConfig<T>) {
         mapping: {
           ...state.mapping,
           [action.id]: {
+            instance,
             isFetching: false,
             isUnableToFetch: false,
             lastFetched: Date.now(),
-            instance,
-          }
-        }
+          },
+        },
       };
     } catch (e) {
       return {
@@ -58,8 +58,8 @@ export default function createReducer<T extends Model>(config: ModelConfig<T>) {
             isFetching: false,
             isUnableToFetch: true,
             lastFetched: Date.now(),
-          }
-        }
+          },
+        },
       };
     }
   };
@@ -89,10 +89,10 @@ export default function createReducer<T extends Model>(config: ModelConfig<T>) {
           const instance = config.convert(data);
 
           result[instance.id] = {
+            instance,
             isFetching: false,
             isUnableToFetch: false,
             lastFetched: Date.now(),
-            instance
           };
         } catch (e) {
           // TODO: Log this exception to state somehow.
@@ -100,7 +100,7 @@ export default function createReducer<T extends Model>(config: ModelConfig<T>) {
 
         return result;
       },
-      {}
+      {},
     ),
   });
 

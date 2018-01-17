@@ -22,5 +22,5 @@ export interface ModelState<T extends Model> {
   lastFetched?: number;
   mapping: {
     [id: string]: ModelStateInstanceMapping<T>;
-  }
+  };
 }

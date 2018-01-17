@@ -1,41 +1,42 @@
-import * as urljoin from 'url-join';
-import { AnyAction, Dispatch } from 'redux';
-import { AxiosInstance } from 'axios';
+import * as urljoin from "url-join";
 
-import Model, { ModelConfig } from './model';
+import { AxiosInstance } from "axios";
+import { AnyAction, Dispatch } from "redux";
+
+import Model, { ModelConfig } from "./model";
 
 export default function createActions<T extends Model>(config: ModelConfig<T>, client: AxiosInstance) {
   const get = (id: string) => (dispatch: Dispatch<AnyAction>) => {
     dispatch({
+      id,
       type: `@@${config.name}/request`,
-      id
     });
 
-    return client.get(urljoin(config.url, id, '/')).then(
-      response => dispatch({
+    return client.get(urljoin(config.url, id, "/")).then(
+      (response) => dispatch({
+        data: response.data,
+        id,
         type: `@@${config.name}/request-success`,
-        id,
-        data: response.data
       }),
-      error => dispatch({
-        type: `@@${config.name}/request-error`,
+      (error) => dispatch({
+        error,
         id,
-        error
-      })
+        type: `@@${config.name}/request-error`,
+      }),
     );
   };
   const list = () => (dispatch: Dispatch<AnyAction>) => {
     dispatch({ type: `@@${config.name}/request-list` });
 
     return client.get(config.url).then(
-      response => dispatch({
+      (response) => dispatch({
+        data: response.data,
         type: `@@${config.name}/request-list-success`,
-        data: response.data
       }),
-      error => dispatch({
+      (error) => dispatch({
+        error,
         type: `@@${config.name}/request-list-error`,
-        error
-      })
+      }),
     );
   };
 
