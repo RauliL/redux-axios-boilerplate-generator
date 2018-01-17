@@ -1,3 +1,4 @@
+import * as urljoin from 'url-join';
 import { AnyAction, Dispatch } from 'redux';
 import { AxiosInstance } from 'axios';
 
@@ -10,7 +11,7 @@ export default function createActions<T extends Model>(config: ModelConfig<T>, c
       id
     });
 
-    return client.get(`${config.url}/${id}/`).then(
+    return client.get(urljoin(config.url, id, '/')).then(
       response => dispatch({
         type: `@@${config.name}/request-success`,
         id,
