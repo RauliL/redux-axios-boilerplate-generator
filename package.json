@@ -1,0 +1,21 @@
+{
+  "name": "redux-axios-boilerplate-generator",
+  "version": "0.1.0",
+  "description": "",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "scripts": {
+    "build": "tsc",
+    "watch": "tsc -w"
+  },
+  "author": "",
+  "license": "MIT",
+  "devDependencies": {
+    "@types/redux": "^3.6.0",
+    "typescript": "^2.6.2"
+  },
+  "dependencies": {
+    "axios": "^0.17.1",
+    "redux": "^3.7.2"
+  }
+}
