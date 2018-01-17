@@ -1,4 +1,4 @@
-import { Model, ModelConfig } from '../dist';
+import Model, { ModelConfig } from '../src/model';
 
 export interface Person extends Model {
   id: string;
