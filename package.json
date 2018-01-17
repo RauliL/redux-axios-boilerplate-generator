@@ -7,7 +7,7 @@
   "scripts": {
     "build": "tsc",
     "watch": "tsc -w",
-    "test": "nyc -r lcov -e .ts jasmine-ts test/*.ts",
+    "test": "nyc jasmine-ts test/*.ts",
     "coveralls": "cat ./coverage/lcov.info | coveralls"
   },
   "author": "",
@@ -26,5 +26,12 @@
   "dependencies": {
     "axios": "^0.17.1",
     "redux": "^3.7.2"
+  },
+  "nyc": {
+    "check-coverage": true,
+    "all": true,
+    "extension": [
+      ".ts"
+    ]
   }
 }
